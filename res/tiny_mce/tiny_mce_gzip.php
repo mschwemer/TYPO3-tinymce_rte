@@ -22,7 +22,7 @@
 	$compress = getParam("compress", "true") == "true";
 	$core = getParam("core", "true") == "true";
 	$suffix = getParam("suffix", "_src") == "_src" ? "_src" : "";
-	$cachePath = "../../../../../typo3temp/tinymce_rte/"; // Cache path, this is where the .gz files will be stored
+	$cachePath = t3lib_div::getIndpEnv('TYPO3_site') . "/typo3temp/tinymce_rte/"; // Cache path, this is where the .gz files will be stored
 	if( !is_dir($cachePath) ) {
 		mkdir( $cachePath );
 	}

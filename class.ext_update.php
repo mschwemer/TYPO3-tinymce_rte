@@ -24,7 +24,7 @@
 
 // TYPO3 version check
 if (TYPO3_branch>=4.2) {
-	require_once('patcher/class.pmkpatcher.php');
+	require_once(PATH_site.'typo3conf/ext/tinymce_rte/patcher/class.pmkpatcher.php');
 	require_once(PATH_typo3.'contrib/jsmin/jsmin.php');
 }
 
