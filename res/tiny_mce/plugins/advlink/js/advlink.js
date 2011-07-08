@@ -348,6 +348,7 @@ function buildOnClick() {
 }
 
 function setAttrib(elm, attrib, value) {
+	var formObj = document.forms[0];
 	var valueElm = formObj.elements[attrib.toLowerCase()];
 	var dom = tinyMCEPopup.editor.dom;
 

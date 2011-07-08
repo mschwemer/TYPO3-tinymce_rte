@@ -15,7 +15,7 @@ Patches the advlink plugin to make the popup tab compatible with TYPO3 links
  	onclick += formObj.popupname.value + "','";
  
  	if (formObj.popuplocation.checked)
-@@ -342,8 +343,8 @@
+@@ -342,11 +343,12 @@
  
  	formObj.onclick.value = onclick;
  
@@ -26,7 +26,11 @@ Patches the advlink plugin to make the popup tab compatible with TYPO3 links
  }
  
  function setAttrib(elm, attrib, value) {
-Patches the advlink plugin to make the popup tab compatible with TYPO3 links
++	var formObj = document.forms[0];
+ 	var valueElm = formObj.elements[attrib.toLowerCase()];
+ 	var dom = tinyMCEPopup.editor.dom;
+ 
+
 --- res/tiny_mce/plugins/advlink/link.htm	Mon Dec 08 18:42:25 2008
 +++ res/tiny_mce/plugins/advlink/link.htm	Mon Dec 08 18:45:00 2008
 @@ -72,7 +72,7 @@
