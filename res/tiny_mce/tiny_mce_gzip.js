@@ -6,9 +6,7 @@ var tinyMCE_GZ = {
 		disk_cache : true,
 		page_name : 'tiny_mce_gzip.php',
 		debug : false,
-		suffix : '',
-		langExt : '',
-		langExtLoaded: ''
+		suffix : ''
 	},
 
 	init : function(s, cb, sc) {
@@ -19,18 +17,22 @@ var tinyMCE_GZ = {
 
 		s = t.settings;
 
-		for (i=0; i<nl.length; i++) {
-			n = nl[i];
+		if (window.tinyMCEPreInit) {
+			t.baseURL = tinyMCEPreInit.base;
+		} else {
+			for (i=0; i<nl.length; i++) {
+				n = nl[i];
 
-			if (n.src && n.src.indexOf('tiny_mce') != -1)
-				t.baseURL = n.src.substring(0, n.src.lastIndexOf('/'));
+				if (n.src && n.src.indexOf('tiny_mce') != -1)
+					t.baseURL = n.src.substring(0, n.src.lastIndexOf('/'));
+			}
 		}
 
 		if (!t.coreLoaded)
-			t.loadScripts(1, s.themes, s.plugins, s.languages, cb, sc, s.langExt, s.langExtLoaded);
+			t.loadScripts(1, s.themes, s.plugins, s.languages, cb, sc);
 	},
 
-	loadScripts : function(co, th, pl, la, cb, sc, langExt, langExtLoaded) {
+	loadScripts : function(co, th, pl, la, cb, sc) {
 		var t = this, x, w = window, q, c = 0, ti, s = t.settings;
 
 		function get(s) {
@@ -45,7 +47,7 @@ var tinyMCE_GZ = {
 		};
 
 		// Build query string
-		q = 'js=true&diskcache=' + (s.disk_cache ? 'true' : 'false') + '&core=' + (co ? 'true' : 'false') + '&suffix=' + escape(s.suffix) + '&themes=' + escape(th) + '&plugins=' + escape(pl) + '&languages=' + escape(la) + '&langExt=' + escape(langExt) + '&langExtLoaded=' + escape(langExtLoaded);
+		q = 'js=true&diskcache=' + (s.disk_cache ? 'true' : 'false') + '&core=' + (co ? 'true' : 'false') + '&suffix=' + escape(s.suffix) + '&themes=' + escape(th) + '&plugins=' + escape(pl) + '&languages=' + escape(la);
 
 		if (co)
 			t.coreLoaded = 1;
@@ -122,15 +124,14 @@ var tinyMCE_GZ = {
 	},
 
 	eval : function(co) {
-		var w = window;
+		var se = document.createElement('script');
 
-		// Evaluate script
-		if (!w.execScript) {
-			if (/Gecko/.test(navigator.userAgent))
-				eval(co, w); // Firefox 3.0
-			else
-				eval.call(w, co);
-		} else
-			w.execScript(co); // IE
+		// Create script
+		se.type = 'text/javascript';
+		se.text = co;
+
+		// Add it to evaluate it and remove it
+		(document.getElementsByTagName('head')[0] || document.documentElement).appendChild(se);
+		se.parentNode.removeChild(se);
 	}
 };
