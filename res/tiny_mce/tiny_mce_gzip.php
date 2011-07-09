@@ -51,7 +51,7 @@ class TinyMCE_Compressor {
 		"languages"  => "",
 		"disk_cache" => true,
 		"expires"    => "30d",
-		"cache_dir"  => "",
+		"cache_dir"  => "../../../../../typo3temp/tinymce_rte/",
 		"compress"   => true,
 		"suffix"     => "",
 		"files"      => "",
