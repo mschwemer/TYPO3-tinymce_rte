@@ -321,7 +321,7 @@ class tx_tinymce_rte_base extends t3lib_rteapi {
 	}
 	
 	/**
-	 * including of all nessecary core files (gzip or seperate, additional language files, callbackJS)
+	 * including of all necessary core files (gzip or seperate, additional language files, callbackJS)
 	 * 
 	 * @param	array		config to use
 	 * @return	array		code incl. script tags
